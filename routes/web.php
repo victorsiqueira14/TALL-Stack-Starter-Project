@@ -42,9 +42,10 @@ Route::post('logout', App\Livewire\Actions\Logout::class)
 // ------------------------------------------------
 // Authenticated Routes
 // ------------------------------------------------
-Route::view('dashboard', 'dashboard')
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function (): void {
+    Route::view('/', 'dashboard')->name('dashboard');
+});
+
 
 Route::middleware(['auth'])->group(function (): void {
     Route::redirect('settings', 'settings/profile');
