@@ -2,10 +2,6 @@
 
 declare(strict_types=1);
 
-use App\Livewire\Settings\Appearance;
-use App\Livewire\Settings\Password;
-use App\Livewire\Settings\Profile;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Livewire\Auth\ConfirmPassword;
 use App\Livewire\Auth\ForgotPassword;
@@ -13,6 +9,10 @@ use App\Livewire\Auth\Login;
 use App\Livewire\Auth\Register;
 use App\Livewire\Auth\ResetPassword;
 use App\Livewire\Auth\VerifyEmail;
+use App\Livewire\Settings\Appearance;
+use App\Livewire\Settings\Password;
+use App\Livewire\Settings\Profile;
+use Illuminate\Support\Facades\Route;
 
 // ------------------------------------------------
 // Auth Routes
@@ -45,7 +45,6 @@ Route::post('logout', App\Livewire\Actions\Logout::class)
 Route::middleware(['auth', 'verified'])->group(function (): void {
     Route::view('/', 'dashboard')->name('dashboard');
 });
-
 
 Route::middleware(['auth'])->group(function (): void {
     Route::redirect('settings', 'settings/profile');
