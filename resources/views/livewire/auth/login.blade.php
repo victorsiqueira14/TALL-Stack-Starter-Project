@@ -7,26 +7,26 @@
     <form wire:submit="login" class="flex flex-col gap-6">
         <!-- Email -->
         <div>
-            <label for="email" class="block text-sm font-medium text-zinc-900 dark:text-zinc-100">
+            <label for="email" class="label">
                 {{ __('Email address') }}
             </label>
             <input type="email" id="email" wire:model="email" required autocomplete="email"
                 placeholder="email@example.com"
-                class="mt-1 block w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm outline-none placeholder:text-zinc-400 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 disabled:bg-zinc-50 disabled:text-zinc-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white dark:placeholder:text-zinc-500 dark:focus:border-primary-400 dark:focus:ring-primary-400 dark:disabled:bg-zinc-900 dark:disabled:text-zinc-400" />
+                class="input" />
         </div>
 
         <div class="relative">
             <div>
-                <label for="password" class="block text-sm font-medium text-zinc-900 dark:text-zinc-100">
+                <label for="password" class="label">
                     {{ __('Password') }}
                 </label>
                 <div class="relative mt-1">
                     <input type="password" id="password" wire:model="password" required autocomplete="current-password"
                         placeholder="{{ __('Password') }}"
-                        class="block w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm outline-none placeholder:text-zinc-400 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 disabled:bg-zinc-50 disabled:text-zinc-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white dark:placeholder:text-zinc-500 dark:focus:border-primary-400 dark:focus:ring-primary-400 dark:disabled:bg-zinc-900 dark:disabled:text-zinc-400" />
+                        class="input pr-10" />
                     <button type="button"
                         onclick="var input = document.getElementById('password'); input.type = input.type === 'password' ? 'text' : 'password';"
-                        class="absolute inset-y-0 right-0 flex items-center px-3 text-zinc-400 hover:text-zinc-500 dark:text-zinc-500 dark:hover:text-zinc-400">
+                        class="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="h-5 w-5">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -38,7 +38,7 @@
             </div>
 
             @if (Route::has('password.request'))
-                <a class="absolute end-0 top-0 text-sm text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
+                <a class="absolute end-0 top-0 text-sm text-primary hover:text-primary/80"
                     href="{{ route('password.request') }}" wire:navigate>
                     {{ __('Forgot your password?') }}
                 </a>
@@ -48,23 +48,23 @@
         <!-- Remember Me -->
         <label class="flex items-center">
             <input type="checkbox" wire:model="remember"
-                class="h-4 w-4 rounded border-zinc-300 text-primary-600 focus:ring-primary-500 dark:border-zinc-700 dark:bg-zinc-800 dark:focus:ring-primary-400" />
-            <span class="ml-2 text-sm text-zinc-600 dark:text-zinc-400">{{ __('Remember me') }}</span>
+                class="h-4 w-4 rounded border-input text-primary focus:ring-primary" />
+            <span class="ml-2 text-sm text-muted-foreground">{{ __('Remember me') }}</span>
         </label>
 
         <div class="flex items-center justify-end">
             <button type="submit"
-                class="inline-flex w-full items-center justify-center rounded-lg bg-primary-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 dark:bg-primary-500 dark:hover:bg-primary-400 dark:focus:ring-primary-400 dark:focus:ring-offset-zinc-800">
+                class="btn btn-default w-full">
                 {{ __('Log in') }}
             </button>
         </div>
     </form>
 
     @if (Route::has('register'))
-        <div class="space-x-1 text-center text-sm text-zinc-600 rtl:space-x-reverse dark:text-zinc-400">
+        <div class="space-x-1 text-center text-sm text-muted-foreground rtl:space-x-reverse">
             {{ __('Don\'t have an account?') }}
             <a href="{{ route('register') }}"
-                class="text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
+                class="text-primary hover:text-primary/80"
                 wire:navigate>
                 {{ __('Sign up') }}
             </a>

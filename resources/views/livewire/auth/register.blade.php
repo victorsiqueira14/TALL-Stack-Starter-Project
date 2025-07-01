@@ -7,36 +7,36 @@
     <form wire:submit="register" class="flex flex-col gap-6">
         <!-- Name -->
         <div>
-            <label for="name" class="block text-sm font-medium text-zinc-900 dark:text-zinc-100">
+            <label for="name" class="block text-sm font-medium text-foreground">
                 {{ __('Name') }}
             </label>
             <input type="text" id="name" wire:model="name" required autofocus autocomplete="name"
                 placeholder="{{ __('Full name') }}"
-                class="mt-1 block w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm outline-none placeholder:text-zinc-400 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 disabled:bg-zinc-50 disabled:text-zinc-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white dark:placeholder:text-zinc-500 dark:focus:border-primary-400 dark:focus:ring-primary-400 dark:disabled:bg-zinc-900 dark:disabled:text-zinc-400" />
+                class="mt-1 block w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground shadow-sm outline-none placeholder:text-muted-foreground focus:border-ring focus:ring-1 focus:ring-ring disabled:bg-muted disabled:text-muted-foreground" />
         </div>
 
         <!-- Email Address -->
         <div>
-            <label for="email" class="block text-sm font-medium text-zinc-900 dark:text-zinc-100">
+            <label for="email" class="block text-sm font-medium text-foreground">
                 {{ __('Email address') }}
             </label>
             <input type="email" id="email" wire:model="email" required autocomplete="email"
                 placeholder="email@example.com"
-                class="mt-1 block w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm outline-none placeholder:text-zinc-400 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 disabled:bg-zinc-50 disabled:text-zinc-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white dark:placeholder:text-zinc-500 dark:focus:border-primary-400 dark:focus:ring-primary-400 dark:disabled:bg-zinc-900 dark:disabled:text-zinc-400" />
+                class="mt-1 block w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground shadow-sm outline-none placeholder:text-muted-foreground focus:border-ring focus:ring-1 focus:ring-ring disabled:bg-muted disabled:text-muted-foreground" />
         </div>
 
         <!-- Password -->
         <div>
-            <label for="password" class="block text-sm font-medium text-zinc-900 dark:text-zinc-100">
+            <label for="password" class="block text-sm font-medium text-foreground">
                 {{ __('Password') }}
             </label>
             <div class="relative mt-1">
                 <input type="password" id="password" wire:model="password" required autocomplete="new-password"
                     placeholder="{{ __('Password') }}"
-                    class="block w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm outline-none placeholder:text-zinc-400 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 disabled:bg-zinc-50 disabled:text-zinc-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white dark:placeholder:text-zinc-500 dark:focus:border-primary-400 dark:focus:ring-primary-400 dark:disabled:bg-zinc-900 dark:disabled:text-zinc-400" />
+                    class="block w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground shadow-sm outline-none placeholder:text-muted-foreground focus:border-ring focus:ring-1 focus:ring-ring disabled:bg-muted disabled:text-muted-foreground" />
                 <button type="button"
                     onclick="var input = document.getElementById('password'); input.type = input.type === 'password' ? 'text' : 'password';"
-                    class="absolute inset-y-0 right-0 flex items-center px-3 text-zinc-400 hover:text-zinc-500 dark:text-zinc-500 dark:hover:text-zinc-400">
+                    class="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="h-5 w-5">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -49,16 +49,16 @@
 
         <!-- Confirm Password -->
         <div>
-            <label for="password_confirmation" class="block text-sm font-medium text-zinc-900 dark:text-zinc-100">
+            <label for="password_confirmation" class="block text-sm font-medium text-foreground">
                 {{ __('Confirm password') }}
             </label>
             <div class="relative mt-1">
                 <input type="password" id="password_confirmation" wire:model="password_confirmation" required
                     autocomplete="new-password" placeholder="{{ __('Confirm password') }}"
-                    class="block w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm outline-none placeholder:text-zinc-400 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 disabled:bg-zinc-50 disabled:text-zinc-500 dark:border-zinc-700 dark:bg-zinc-800 dark:text-white dark:placeholder:text-zinc-500 dark:focus:border-primary-400 dark:focus:ring-primary-400 dark:disabled:bg-zinc-900 dark:disabled:text-zinc-400" />
+                    class="block w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground shadow-sm outline-none placeholder:text-muted-foreground focus:border-ring focus:ring-1 focus:ring-ring disabled:bg-muted disabled:text-muted-foreground" />
                 <button type="button"
                     onclick="var input = document.getElementById('password_confirmation'); input.type = input.type === 'password' ? 'text' : 'password';"
-                    class="absolute inset-y-0 right-0 flex items-center px-3 text-zinc-400 hover:text-zinc-500 dark:text-zinc-500 dark:hover:text-zinc-400">
+                    class="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="h-5 w-5">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -71,17 +71,17 @@
 
         <div class="flex items-center justify-end">
             <button type="submit"
-                class="inline-flex w-full items-center justify-center rounded-lg bg-primary-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 dark:bg-primary-500 dark:hover:bg-primary-400 dark:focus:ring-primary-400 dark:focus:ring-offset-zinc-800">
+                class="inline-flex w-full items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:opacity-50">
                 {{ __('Register') }}
             </button>
         </div>
     </form>
 
     @if (Route::has('login'))
-        <div class="space-x-1 text-center text-sm text-zinc-600 rtl:space-x-reverse dark:text-zinc-400">
+        <div class="space-x-1 text-center text-sm text-muted-foreground rtl:space-x-reverse">
             {{ __('Already have an account?') }}
             <a href="{{ route('login') }}"
-                class="text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
+                class="text-primary hover:text-primary/80"
                 wire:navigate>
                 {{ __('Log in') }}
             </a>

@@ -5,7 +5,7 @@
     @include('partials.head')
 </head>
 
-<body class="min-h-screen bg-white dark:bg-zinc-800" x-data="{ sidebarOpen: false }" x-init="console.log('Alpine.js loaded')">
+<body class="min-h-screen bg-background text-foreground" x-data="{ sidebarOpen: false }" x-init="console.log('Alpine.js loaded')">
     <!-- Mobile Sidebar Backdrop -->
     <div x-show="sidebarOpen" x-cloak x-transition:enter="transition-opacity ease-linear duration-300"
         x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
@@ -15,11 +15,11 @@
 
     <!-- Sidebar -->
     <aside
-        class="fixed inset-y-0 left-0 z-50 w-64 transform border-e border-zinc-200 bg-zinc-50 transition-transform duration-300 ease-in-out dark:border-zinc-700 dark:bg-zinc-900 lg:translate-x-0"
+        class="fixed inset-y-0 left-0 z-50 w-64 transform border-e border-sidebar-border bg-sidebar transition-transform duration-300 ease-in-out lg:translate-x-0"
         :class="{ 'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen }">
         <!-- Mobile Toggle Close Button -->
         <button @click="sidebarOpen = false"
-            class="absolute right-4 top-4 text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-300 lg:hidden">
+            class="absolute right-4 top-4 text-muted-foreground hover:text-foreground lg:hidden">
             <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
             </svg>
@@ -35,12 +35,12 @@
         <nav class="mt-8 space-y-6 px-4">
             <!-- Platform Section -->
             <div>
-                <h3 class="px-2 text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                <h3 class="px-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                     {{ __('Platform') }}
                 </h3>
                 <div class="mt-2 space-y-1">
                     <a href="{{ route('dashboard') }}"
-                        class="group flex items-center rounded-lg px-2 py-2 text-sm font-medium {{ request()->routeIs('dashboard') ? 'bg-zinc-200 text-zinc-900 dark:bg-zinc-800 dark:text-white' : 'text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800' }}"
+                        class="group flex items-center rounded-lg px-2 py-2 text-sm font-medium {{ request()->routeIs('dashboard') ? 'bg-sidebar-accent text-sidebar-accent-foreground' : 'text-sidebar-foreground hover:bg-sidebar-accent/50' }}"
                         wire:navigate>
                         <svg class="mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                             stroke-width="1.5" stroke="currentColor">
@@ -56,7 +56,7 @@
             <div class="mt-auto">
                 <div class="space-y-1">
                     <a href="https://github.com/laravel/livewire-starter-kit"
-                        class="group flex items-center rounded-lg px-2 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
+                        class="group flex items-center rounded-lg px-2 py-2 text-sm font-medium text-sidebar-foreground hover:bg-sidebar-accent/50"
                         target="_blank">
                         <svg class="mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                             stroke-width="1.5" stroke="currentColor">
@@ -66,7 +66,7 @@
                         {{ __('Repository') }}
                     </a>
                     <a href="https://laravel.com/docs/starter-kits#livewire"
-                        class="group flex items-center rounded-lg px-2 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800"
+                        class="group flex items-center rounded-lg px-2 py-2 text-sm font-medium text-sidebar-foreground hover:bg-sidebar-accent/50"
                         target="_blank">
                         <svg class="mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                             stroke-width="1.5" stroke="currentColor">
@@ -81,10 +81,10 @@
             <!-- Desktop User Menu -->
             <div x-data="{ open: false }" class="relative">
                 <button @click="open = !open"
-                    class="flex w-full items-center justify-between rounded-lg px-2 py-2 text-sm font-medium text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800">
+                    class="flex w-full items-center justify-between rounded-lg px-2 py-2 text-sm font-medium text-sidebar-foreground hover:bg-sidebar-accent/50">
                     <div class="flex items-center">
                         <span
-                            class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white">
+                            class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-lg bg-muted text-foreground">
                             <span class="flex h-full w-full items-center justify-center">
                                 {{ auth()->user()->initials() }}
                             </span>
@@ -106,17 +106,17 @@
                     x-transition:leave="transition ease-in duration-75"
                     x-transition:leave-start="transform opacity-100 scale-100"
                     x-transition:leave-end="transform opacity-0 scale-95"
-                    class="absolute bottom-full left-0 z-50 mb-2 w-56 rounded-lg border border-zinc-200 bg-white shadow-lg dark:border-zinc-700 dark:bg-zinc-800">
+                    class="absolute bottom-full left-0 z-50 mb-2 w-56 rounded-lg border border-border bg-popover shadow-lg">
                     <div class="p-2">
                         <div class="px-3 py-2">
-                            <p class="truncate text-sm font-medium text-zinc-900 dark:text-white">
+                            <p class="truncate text-sm font-medium text-popover-foreground">
                                 {{ auth()->user()->name }}</p>
-                            <p class="truncate text-sm text-zinc-500 dark:text-zinc-400">{{ auth()->user()->email }}
+                            <p class="truncate text-sm text-muted-foreground">{{ auth()->user()->email }}
                             </p>
                         </div>
-                        <hr class="my-2 border-zinc-200 dark:border-zinc-700">
+                        <hr class="my-2 border-border">
                         <a href="{{ route('settings.profile') }}" @click="open = false"
-                            class="flex items-center rounded-md px-3 py-2 text-sm text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-700"
+                            class="flex items-center rounded-md px-3 py-2 text-sm text-popover-foreground hover:bg-accent hover:text-accent-foreground"
                             wire:navigate>
                             <svg class="mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -127,11 +127,11 @@
                             </svg>
                             {{ __('Settings') }}
                         </a>
-                        <hr class="my-2 border-zinc-200 dark:border-zinc-700">
+                        <hr class="my-2 border-border">
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit"
-                                class="flex w-full items-center rounded-md px-3 py-2 text-sm text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-700">
+                                class="flex w-full items-center rounded-md px-3 py-2 text-sm text-popover-foreground hover:bg-accent hover:text-accent-foreground">
                                 <svg class="mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none"
                                     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -148,9 +148,9 @@
 
     <!-- Mobile Header -->
     <header
-        class="fixed inset-x-0 top-0 z-40 flex h-16 items-center border-b border-zinc-200 bg-white px-4 dark:border-zinc-700 dark:bg-zinc-900 lg:hidden">
+        class="fixed inset-x-0 top-0 z-40 flex h-16 items-center border-b border-border bg-background px-4 lg:hidden">
         <button @click="sidebarOpen = true"
-            class="text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-300">
+            class="text-muted-foreground hover:text-foreground">
             <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
                 </path>
@@ -160,9 +160,9 @@
         <!-- Mobile User Menu -->
         <div class="ml-auto" x-data="{ open: false }">
             <button @click="open = !open"
-                class="flex items-center rounded-lg text-sm text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800">
+                class="flex items-center rounded-lg text-sm text-foreground hover:bg-accent">
                 <span
-                    class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white">
+                    class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-lg bg-muted text-foreground">
                     <span class="flex h-full w-full items-center justify-center">
                         {{ auth()->user()->initials() }}
                     </span>
@@ -182,16 +182,16 @@
                 x-transition:leave="transition ease-in duration-75"
                 x-transition:leave-start="transform opacity-100 scale-100"
                 x-transition:leave-end="transform opacity-0 scale-95"
-                class="absolute right-2 top-full mt-2 w-56 rounded-lg border border-zinc-200 bg-white shadow-lg dark:border-zinc-700 dark:bg-zinc-800">
+                class="absolute right-2 top-full mt-2 w-56 rounded-lg border border-border bg-popover shadow-lg">
                 <div class="p-2">
                     <div class="px-3 py-2">
-                        <p class="truncate text-sm font-medium text-zinc-900 dark:text-white">
+                        <p class="truncate text-sm font-medium text-popover-foreground">
                             {{ auth()->user()->name }}</p>
-                        <p class="truncate text-sm text-zinc-500 dark:text-zinc-400">{{ auth()->user()->email }}</p>
+                        <p class="truncate text-sm text-muted-foreground">{{ auth()->user()->email }}</p>
                     </div>
-                    <hr class="my-2 border-zinc-200 dark:border-zinc-700">
+                    <hr class="my-2 border-border">
                     <a href="{{ route('settings.profile') }}" @click="open = false"
-                        class="flex items-center rounded-md px-3 py-2 text-sm text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-700"
+                        class="flex items-center rounded-md px-3 py-2 text-sm text-popover-foreground hover:bg-accent hover:text-accent-foreground"
                         wire:navigate>
                         <svg class="mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -202,11 +202,11 @@
                         </svg>
                         {{ __('Settings') }}
                     </a>
-                    <hr class="my-2 border-zinc-200 dark:border-zinc-700">
+                    <hr class="my-2 border-border">
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit"
-                            class="flex w-full items-center rounded-md px-3 py-2 text-sm text-zinc-700 hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-700">
+                            class="flex w-full items-center rounded-md px-3 py-2 text-sm text-popover-foreground hover:bg-accent hover:text-accent-foreground">
                             <svg class="mr-3 h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -222,7 +222,9 @@
 
     <!-- Main Content -->
     <div class="lg:pl-64">
-        {{ $slot }}
+        <div class="min-h-screen bg-background p-4 pt-20 lg:pt-4">
+            {{ $slot }}
+        </div>
     </div>
 
     @livewireScripts
