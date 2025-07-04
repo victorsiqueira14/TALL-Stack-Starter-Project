@@ -272,9 +272,54 @@
 
     <!-- Main Content -->
     <div class="lg:pl-64">
-        <div class="min-h-screen bg-background p-4 pt-20 lg:pt-4">
+        <!-- Content Header -->
+        <header class="flex h-16 shrink-0 items-center gap-2 border-b border-border bg-background px-4">
+            <div class="flex items-center gap-2">
+                <!-- Mobile Menu Trigger -->
+                <button @click="sidebarOpen = true" class="lg:hidden text-foreground hover:text-foreground/80">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+
+                <!-- Separator -->
+                <div class="separator separator-vertical h-4 mr-2 lg:ml-0"></div>
+
+                <!-- Breadcrumbs -->
+                <nav class="flex" aria-label="Breadcrumb">
+                    <ol class="flex items-center space-x-1 md:space-x-2">
+                        <li class="hidden md:block">
+                            <a href="{{ route('dashboard') }}"
+                                class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                                wire:navigate>
+                                {{ config('app.name', 'Laravel') }}
+                            </a>
+                        </li>
+                        @if (!request()->routeIs('dashboard'))
+                            <li class="hidden md:block">
+                                <svg class="flex-shrink-0 h-4 w-4 text-muted-foreground" fill="currentColor"
+                                    viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </li>
+                        @endif
+                        <li>
+                            <span class="text-sm font-medium text-foreground">
+                                {{ $title ?? 'Dashboard' }}
+                            </span>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="flex flex-1 flex-col gap-4 p-4 pt-0">
             {{ $slot }}
-        </div>
+        </main>
     </div>
 
     @livewireScripts
