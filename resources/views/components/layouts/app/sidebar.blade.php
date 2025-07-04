@@ -5,37 +5,28 @@
     @include('partials.head')
 </head>
 
-<body class="min-h-screen bg-background text-foreground" x-data="{ sidebarOpen: false }" x-init="
-    console.log('Alpine.js loaded');
-    
-    // Get saved state or set default based on screen size
-    function initializeSidebarState() {
+<body class="min-h-screen bg-background text-foreground" x-data="{ 
+    sidebarOpen: false,
+    init() {
         const savedState = localStorage.getItem('sidebarOpen');
+
         if (savedState !== null) {
-            sidebarOpen = savedState === 'true';
+            this.sidebarOpen = savedState === 'true';
         } else {
-            sidebarOpen = window.innerWidth >= 1024;
+            this.sidebarOpen = window.innerWidth >= 1024;
         }
+        
+        this.$watch('sidebarOpen', value => {
+            localStorage.setItem('sidebarOpen', value);
+        });
+        
+        window.addEventListener('resize', () => {
+            if (window.innerWidth < 1024) {
+                this.sidebarOpen = false;
+            }
+        });
     }
-    
-    // Save state to localStorage whenever it changes
-    $watch('sidebarOpen', value => {
-        localStorage.setItem('sidebarOpen', value);
-    });
-    
-    // Handle window resize
-    function handleResize() {
-        if (window.innerWidth < 1024) {
-            sidebarOpen = false;
-        }
-    }
-    
-    // Listen for resize events
-    window.addEventListener('resize', handleResize);
-    
-    // Initialize state
-    initializeSidebarState();
-">
+}">
     <!-- Mobile Sidebar Backdrop -->
     <div x-show="sidebarOpen" x-cloak x-transition:enter="transition-opacity ease-linear duration-300"
         x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
