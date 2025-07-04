@@ -8,23 +8,33 @@
 <body class="min-h-screen bg-background text-foreground" x-data="{ sidebarOpen: false }" x-init="
     console.log('Alpine.js loaded');
     
-    // Set initial sidebar state based on screen size
-    function updateSidebarState() {
-        if (window.innerWidth >= 1024) {
-            sidebarOpen = true;
+    // Get saved state or set default based on screen size
+    function initializeSidebarState() {
+        const savedState = localStorage.getItem('sidebarOpen');
+        if (savedState !== null) {
+            sidebarOpen = savedState === 'true';
         } else {
+            sidebarOpen = window.innerWidth >= 1024;
+        }
+    }
+    
+    // Save state to localStorage whenever it changes
+    $watch('sidebarOpen', value => {
+        localStorage.setItem('sidebarOpen', value);
+    });
+    
+    // Handle window resize
+    function handleResize() {
+        if (window.innerWidth < 1024) {
             sidebarOpen = false;
         }
     }
     
     // Listen for resize events
-    window.addEventListener('resize', updateSidebarState);
+    window.addEventListener('resize', handleResize);
     
-    // Set initial state
-    updateSidebarState();
-    
-    // Store reference to window for Alpine expressions
-    window.Alpine = Alpine;
+    // Initialize state
+    initializeSidebarState();
 ">
     <!-- Mobile Sidebar Backdrop -->
     <div x-show="sidebarOpen" x-cloak x-transition:enter="transition-opacity ease-linear duration-300"
@@ -35,8 +45,7 @@
 
     <!-- Sidebar -->
     <div class="fixed inset-y-0 left-0 z-50 w-64 transform border-e border-sidebar-border bg-sidebar transition-transform duration-300 ease-in-out flex flex-col"
-        :class="{ 'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen }" 
-        x-cloak>
+        :class="{ 'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen }" x-cloak>
 
         <!-- Mobile Toggle Close Button -->
         <button @click="sidebarOpen = false"
@@ -292,12 +301,9 @@
             <div class="flex items-center gap-2">
                 <!-- Sidebar Toggle Button (Desktop) -->
                 <button @click="sidebarOpen = !sidebarOpen" class="text-foreground hover:text-foreground/80">
-                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-                        <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
-                        <line x1="9" x2="9" y1="9" y2="21" />
-                        <line x1="14" x2="14" y1="9" y2="21" />
-                        <line x1="5" x2="19" y1="5" y2="5" />
-                        <line x1="5" x2="19" y1="9" y2="9" />
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9 3V21" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </button>
 
