@@ -288,7 +288,7 @@
     <!-- Main Content -->
     <div class="transition-all duration-300 ease-in-out" :class="{ 'lg:pl-64': sidebarOpen, 'lg:pl-0': !sidebarOpen }">
         <!-- Content Header -->
-        <header class="flex h-16 shrink-0 items-center gap-2 border-b border-border bg-background px-4">
+        <header class="flex h-16 shrink-0 items-center gap-2 border-b border-border bg-background px-4 mb-4">
             <div class="flex items-center gap-2">
                 <!-- Sidebar Toggle Button (Desktop) -->
                 <button @click="sidebarOpen = !sidebarOpen" class="text-foreground hover:text-foreground/80">
