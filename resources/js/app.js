@@ -49,15 +49,19 @@ document.addEventListener("visibilitychange", () => {
 // Add smooth transition for page changes (for non-Livewire navigation)
 document.addEventListener("DOMContentLoaded", () => {
     // Add page transition class to body
-    document.body.classList.add("transition-opacity", "duration-150", "ease-in-out");
-    
+    document.body.classList.add(
+        "transition-opacity",
+        "duration-150",
+        "ease-in-out"
+    );
+
     // Handle form submissions to maintain theme
     document.addEventListener("submit", () => {
         // Store current theme before form submission
         const currentTheme = localStorage.theme || "system";
         sessionStorage.setItem("pendingTheme", currentTheme);
     });
-    
+
     // Restore theme after form submissions/redirects
     const pendingTheme = sessionStorage.getItem("pendingTheme");
     if (pendingTheme) {
@@ -73,7 +77,7 @@ window.Alpine = Alpine;
 document.addEventListener("DOMContentLoaded", () => {
     // Apply theme immediately when page loads
     applyTheme();
-    
+
     if (window.Livewire) {
         document.addEventListener("livewire:initialized", () => {
             Alpine.start();
