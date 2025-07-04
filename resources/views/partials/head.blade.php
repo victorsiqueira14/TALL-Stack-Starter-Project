@@ -10,5 +10,17 @@
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
+<!-- Theme initialization - must run before any content renders to prevent flash -->
+<script>
+    (function() {
+        const theme = localStorage.theme || 'system';
+        if (theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    })();
+</script>
+
 @livewireStyles
 @vite(['resources/css/app.css', 'resources/js/app.js'])
