@@ -14,7 +14,7 @@
         class="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden"></div>
 
     <!-- Sidebar -->
-    <div class="fixed inset-y-0 left-0 z-50 w-64 transform border-e border-sidebar-border bg-sidebar transition-transform duration-300 ease-in-out lg:translate-x-0"
+    <div class="fixed inset-y-0 left-0 z-50 w-64 transform border-e border-sidebar-border bg-sidebar transition-transform duration-300 ease-in-out lg:translate-x-0 flex flex-col"
         :class="{ 'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen }">
 
         <!-- Mobile Toggle Close Button -->
@@ -138,7 +138,7 @@
             </div>
         </div>
 
-        <!-- Sidebar Footer -->
+        <!-- User Menu - Footer -->
         <div class="border-t border-sidebar-border p-4">
             <div x-data="{ open: false }" class="relative">
                 <button @click="open = !open"
