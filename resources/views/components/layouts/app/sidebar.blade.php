@@ -5,7 +5,27 @@
     @include('partials.head')
 </head>
 
-<body class="min-h-screen bg-background text-foreground" x-data="{ sidebarOpen: false }" x-init="console.log('Alpine.js loaded')">
+<body class="min-h-screen bg-background text-foreground" x-data="{ sidebarOpen: false }" x-init="
+    console.log('Alpine.js loaded');
+    
+    // Set initial sidebar state based on screen size
+    function updateSidebarState() {
+        if (window.innerWidth >= 1024) {
+            sidebarOpen = true;
+        } else {
+            sidebarOpen = false;
+        }
+    }
+    
+    // Listen for resize events
+    window.addEventListener('resize', updateSidebarState);
+    
+    // Set initial state
+    updateSidebarState();
+    
+    // Store reference to window for Alpine expressions
+    window.Alpine = Alpine;
+">
     <!-- Mobile Sidebar Backdrop -->
     <div x-show="sidebarOpen" x-cloak x-transition:enter="transition-opacity ease-linear duration-300"
         x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
@@ -14,8 +34,9 @@
         class="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden"></div>
 
     <!-- Sidebar -->
-    <div class="fixed inset-y-0 left-0 z-50 w-64 transform border-e border-sidebar-border bg-sidebar transition-transform duration-300 ease-in-out lg:translate-x-0 flex flex-col"
-        :class="{ 'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen }">
+    <div class="fixed inset-y-0 left-0 z-50 w-64 transform border-e border-sidebar-border bg-sidebar transition-transform duration-300 ease-in-out flex flex-col"
+        :class="{ 'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen }" 
+        x-cloak>
 
         <!-- Mobile Toggle Close Button -->
         <button @click="sidebarOpen = false"
@@ -265,45 +286,82 @@
     </header>
 
     <!-- Main Content -->
-    <div class="lg:pl-64">
+    <div class="transition-all duration-300 ease-in-out" :class="{ 'lg:pl-64': sidebarOpen, 'lg:pl-0': !sidebarOpen }">
         <!-- Content Header -->
         <header class="flex h-16 shrink-0 items-center gap-2 border-b border-border bg-background px-4">
             <div class="flex items-center gap-2">
-                <!-- Mobile Menu Trigger -->
-                <button @click="sidebarOpen = true" class="lg:hidden text-foreground hover:text-foreground/80">
-                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16"></path>
+                <!-- Sidebar Toggle Button (Desktop) -->
+                <button @click="sidebarOpen = !sidebarOpen" class="text-foreground hover:text-foreground/80">
+                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                        <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
+                        <line x1="9" x2="9" y1="9" y2="21" />
+                        <line x1="14" x2="14" y1="9" y2="21" />
+                        <line x1="5" x2="19" y1="5" y2="5" />
+                        <line x1="5" x2="19" y1="9" y2="9" />
                     </svg>
                 </button>
 
                 <!-- Separator -->
-                <div class="separator separator-vertical h-4 mr-2 lg:ml-0"></div>
+                <div class="separator separator-vertical h-4 mr-2"></div>
 
                 <!-- Breadcrumbs -->
                 <nav class="flex" aria-label="Breadcrumb">
                     <ol class="flex items-center space-x-1 md:space-x-2">
-                        <li class="hidden md:block">
-                            <a href="{{ route('dashboard') }}"
-                                class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
-                                {{ config('app.name', 'Laravel') }}
-                            </a>
-                        </li>
-                        @if (!request()->routeIs('dashboard'))
-                            <li class="hidden md:block">
-                                <svg class="flex-shrink-0 h-4 w-4 text-muted-foreground" fill="currentColor"
+                        @if (request()->routeIs('dashboard'))
+                            <li>
+                                <span class="text-sm font-medium text-foreground">
+                                    Dashboard
+                                </span>
+                            </li>
+                        @elseif (request()->routeIs('settings.*'))
+                            <li>
+                                <a href="{{ route('dashboard') }}"
+                                    class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                                    Building Your Application
+                                </a>
+                            </li>
+                            <li>
+                                <svg class="flex-shrink-0 h-4 w-4 text-muted-foreground mx-2" fill="currentColor"
                                     viewBox="0 0 20 20">
                                     <path fill-rule="evenodd"
                                         d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
                                         clip-rule="evenodd" />
                                 </svg>
                             </li>
+                            <li>
+                                <span class="text-sm font-medium text-foreground">
+                                    @if (request()->routeIs('settings.profile'))
+                                        Profile Settings
+                                    @elseif (request()->routeIs('settings.password'))
+                                        Password Settings
+                                    @elseif (request()->routeIs('settings.appearance'))
+                                        Appearance Settings
+                                    @else
+                                        Settings
+                                    @endif
+                                </span>
+                            </li>
+                        @else
+                            <li>
+                                <a href="{{ route('dashboard') }}"
+                                    class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                                    Dashboard
+                                </a>
+                            </li>
+                            <li>
+                                <svg class="flex-shrink-0 h-4 w-4 text-muted-foreground mx-2" fill="currentColor"
+                                    viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </li>
+                            <li>
+                                <span class="text-sm font-medium text-foreground">
+                                    {{ $title ?? 'Page' }}
+                                </span>
+                            </li>
                         @endif
-                        <li>
-                            <span class="text-sm font-medium text-foreground">
-                                {{ $title ?? 'Dashboard' }}
-                            </span>
-                        </li>
                     </ol>
                 </nav>
             </div>
