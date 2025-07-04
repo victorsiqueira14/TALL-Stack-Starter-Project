@@ -1,14 +1,16 @@
-import Alpine from 'alpinejs'
+import Alpine from "alpinejs";
+import collapse from "@alpinejs/collapse";
 
-window.Alpine = Alpine
+Alpine.plugin(collapse);
+window.Alpine = Alpine;
 
 // Wait for Livewire to be ready before starting Alpine
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener("DOMContentLoaded", () => {
     if (window.Livewire) {
-        document.addEventListener('livewire:initialized', () => {
-            Alpine.start()
-        })
+        document.addEventListener("livewire:initialized", () => {
+            Alpine.start();
+        });
     } else {
-        Alpine.start()
+        Alpine.start();
     }
-})
+});
