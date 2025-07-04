@@ -6,13 +6,7 @@
             appearance: localStorage.theme || 'system',
             updateAppearance(value) {
                 this.appearance = value;
-                if (value === 'dark' || (value === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                    document.documentElement.classList.add('dark');
-                    localStorage.theme = value;
-                } else {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.theme = value === 'system' ? 'system' : 'light';
-                }
+                window.updateTheme(value);
             }
         }" x-init="updateAppearance(appearance)"
             class="inline-flex rounded-lg border border-zinc-200 bg-white p-1 dark:border-zinc-700 dark:bg-zinc-800">
