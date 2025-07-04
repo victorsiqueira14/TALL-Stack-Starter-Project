@@ -46,17 +46,40 @@ document.addEventListener("visibilitychange", () => {
     }
 });
 
+// Add smooth transition for page changes (for non-Livewire navigation)
+document.addEventListener("DOMContentLoaded", () => {
+    // Add page transition class to body
+    document.body.classList.add("transition-opacity", "duration-150", "ease-in-out");
+    
+    // Handle form submissions to maintain theme
+    document.addEventListener("submit", () => {
+        // Store current theme before form submission
+        const currentTheme = localStorage.theme || "system";
+        sessionStorage.setItem("pendingTheme", currentTheme);
+    });
+    
+    // Restore theme after form submissions/redirects
+    const pendingTheme = sessionStorage.getItem("pendingTheme");
+    if (pendingTheme) {
+        window.updateTheme(pendingTheme);
+        sessionStorage.removeItem("pendingTheme");
+    }
+});
+
 Alpine.plugin(collapse);
 window.Alpine = Alpine;
 
-// Wait for Livewire to be ready before starting Alpine
+// Wait for DOM to be ready before starting Alpine
 document.addEventListener("DOMContentLoaded", () => {
+    // Apply theme immediately when page loads
+    applyTheme();
+    
     if (window.Livewire) {
         document.addEventListener("livewire:initialized", () => {
             Alpine.start();
         });
 
-        // Reapply theme after Livewire navigation
+        // Reapply theme after Livewire navigation (for settings pages)
         document.addEventListener("livewire:navigated", () => {
             applyTheme();
         });

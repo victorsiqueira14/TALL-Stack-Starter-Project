@@ -28,7 +28,7 @@
         <!-- Sidebar Header -->
         <div class="flex h-16 items-center border-b border-sidebar-border px-4">
             <div class="flex items-center">
-                <a href="{{ route('dashboard') }}" class="flex items-center gap-2 font-semibold" wire:navigate>
+                <a href="{{ route('dashboard') }}" class="flex items-center gap-2 font-semibold">
                     <div
                         class="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
                         <x-app-logo-icon class="size-4" />
@@ -50,7 +50,7 @@
                         <div class="space-y-1">
                             <!-- Dashboard -->
                             <div class="pb-2">
-                                <a href="{{ route('dashboard') }}"
+                                <a href="{{ route('dashboard') }} "
                                     class="flex w-full items-center rounded-sm px-2 py-1.5 text-sm font-medium transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground {{ request()->routeIs('dashboard') ? 'bg-sidebar-accent text-sidebar-accent-foreground' : 'text-sidebar-foreground' }}"
                                     wire:navigate>
                                     <svg class="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -84,18 +84,15 @@
 
                                 <div x-show="open" x-collapse class="ml-6 mt-1 space-y-1">
                                     <a href="{{ route('settings.profile') }}"
-                                        class="flex w-full items-center rounded-sm px-2 py-1.5 text-sm transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground {{ request()->routeIs('settings.profile') ? 'bg-sidebar-accent text-sidebar-accent-foreground' : 'text-sidebar-foreground/70' }}"
-                                        wire:navigate>
+                                        class="flex w-full items-center rounded-sm px-2 py-1.5 text-sm transition-[background-color] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground {{ request()->routeIs('settings.profile') ? 'bg-sidebar-accent text-sidebar-accent-foreground' : 'text-sidebar-foreground/70' }}">
                                         {{ __('Profile') }}
                                     </a>
                                     <a href="{{ route('settings.password') }}"
-                                        class="flex w-full items-center rounded-sm px-2 py-1.5 text-sm transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground {{ request()->routeIs('settings.password') ? 'bg-sidebar-accent text-sidebar-accent-foreground' : 'text-sidebar-foreground/70' }}"
-                                        wire:navigate>
+                                        class="flex w-full items-center rounded-sm px-2 py-1.5 text-sm transition-[background-color] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground {{ request()->routeIs('settings.password') ? 'bg-sidebar-accent text-sidebar-accent-foreground' : 'text-sidebar-foreground/70' }}">
                                         {{ __('Password') }}
                                     </a>
                                     <a href="{{ route('settings.appearance') }}"
-                                        class="flex w-full items-center rounded-sm px-2 py-1.5 text-sm transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground {{ request()->routeIs('settings.appearance') ? 'bg-sidebar-accent text-sidebar-accent-foreground' : 'text-sidebar-foreground/70' }}"
-                                        wire:navigate>
+                                        class="flex w-full items-center rounded-sm px-2 py-1.5 text-sm transition-[background-color] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground {{ request()->routeIs('settings.appearance') ? 'bg-sidebar-accent text-sidebar-accent-foreground' : 'text-sidebar-foreground/70' }}">
                                         {{ __('Appearance') }}
                                     </a>
                                 </div>
@@ -104,7 +101,7 @@
                             <!-- Resources Section -->
                             <div x-data="{ open: false }">
                                 <button @click="open = !open"
-                                    class="flex w-full items-center rounded-sm px-2 py-1.5 text-sm font-medium transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sidebar-foreground">
+                                    class="flex w-full items-center rounded-sm px-2 py-1.5 text-sm font-medium transition-[background-color] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sidebar-foreground">
                                     <svg class="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none"
                                         viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -121,12 +118,12 @@
 
                                 <div x-show="open" x-collapse class="ml-6 mt-1 space-y-1">
                                     <a href="https://laravel.com/docs/starter-kits#livewire"
-                                        class="flex w-full items-center rounded-sm px-2 py-1.5 text-sm transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sidebar-foreground/70"
+                                        class="flex w-full items-center rounded-sm px-2 py-1.5 text-sm transition-[background-color] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sidebar-foreground/70"
                                         target="_blank">
                                         {{ __('Documentation') }}
                                     </a>
                                     <a href="https://github.com/laravel/livewire-starter-kit"
-                                        class="flex w-full items-center rounded-sm px-2 py-1.5 text-sm transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sidebar-foreground/70"
+                                        class="flex w-full items-center rounded-sm px-2 py-1.5 text-sm transition-[background-color] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sidebar-foreground/70"
                                         target="_blank">
                                         {{ __('Repository') }}
                                     </a>
@@ -142,7 +139,7 @@
         <div class="border-t border-sidebar-border p-4">
             <div x-data="{ open: false }" class="relative">
                 <button @click="open = !open"
-                    class="flex w-full items-center gap-2 rounded-sm px-2 py-1.5 text-sm font-medium transition-colors hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sidebar-foreground">
+                    class="flex w-full items-center gap-2 rounded-sm px-2 py-1.5 text-sm font-medium transition-[background-color] hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sidebar-foreground">
                     <span
                         class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                         <span class="flex h-full w-full items-center justify-center text-xs">
@@ -175,8 +172,7 @@
                     </div>
                     <div class="my-1 h-px bg-sidebar-border"></div>
                     <a href="{{ route('settings.profile') }}" @click="open = false"
-                        class="flex w-full items-center rounded-sm px-2 py-1.5 text-sm transition-colors hover:bg-accent hover:text-accent-foreground text-popover-foreground"
-                        wire:navigate>
+                        class="flex w-full items-center rounded-sm px-2 py-1.5 text-sm transition-[background-color] hover:bg-accent hover:text-accent-foreground text-popover-foreground">
                         <svg class="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -188,7 +184,7 @@
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button type="submit"
-                            class="flex w-full items-center rounded-sm px-2 py-1.5 text-sm transition-colors hover:bg-accent hover:text-accent-foreground text-popover-foreground">
+                            class="flex w-full items-center rounded-sm px-2 py-1.5 text-sm transition-[background-color] hover:bg-accent hover:text-accent-foreground text-popover-foreground">
                             <svg class="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -215,7 +211,7 @@
         <!-- Mobile User Menu -->
         <div class="ml-auto" x-data="{ open: false }">
             <button @click="open = !open"
-                class="flex items-center gap-2 rounded-sm p-1.5 text-sm transition-colors hover:bg-accent hover:text-accent-foreground text-foreground">
+                class="flex items-center gap-2 rounded-sm p-1.5 text-sm transition-[background-color] hover:bg-accent hover:text-accent-foreground text-foreground">
                 <span
                     class="relative flex h-8 w-8 shrink-0 overflow-hidden rounded-lg bg-primary text-primary-foreground">
                     <span class="flex h-full w-full items-center justify-center text-xs">
@@ -244,8 +240,7 @@
                 </div>
                 <div class="my-1 h-px bg-border"></div>
                 <a href="{{ route('settings.profile') }}" @click="open = false"
-                    class="flex w-full items-center rounded-sm px-2 py-1.5 text-sm transition-colors hover:bg-accent hover:text-accent-foreground text-popover-foreground"
-                    wire:navigate>
+                    class="flex w-full items-center rounded-sm px-2 py-1.5 text-sm transition-[background-color] hover:bg-accent hover:text-accent-foreground text-popover-foreground">
                     <svg class="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke-width="1.5" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -257,7 +252,7 @@
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button type="submit"
-                        class="flex w-full items-center rounded-sm px-2 py-1.5 text-sm transition-colors hover:bg-accent hover:text-accent-foreground text-popover-foreground">
+                        class="flex w-full items-center rounded-sm px-2 py-1.5 text-sm transition-[background-color] hover:bg-accent hover:text-accent-foreground text-popover-foreground">
                         <svg class="mr-2 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -291,8 +286,7 @@
                     <ol class="flex items-center space-x-1 md:space-x-2">
                         <li class="hidden md:block">
                             <a href="{{ route('dashboard') }}"
-                                class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                                wire:navigate>
+                                class="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
                                 {{ config('app.name', 'Laravel') }}
                             </a>
                         </li>
