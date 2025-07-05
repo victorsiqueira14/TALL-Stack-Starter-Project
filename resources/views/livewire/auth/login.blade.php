@@ -1,29 +1,23 @@
 <div class="flex flex-col gap-6">
-    {{-- <x-auth-header :title="__('Log in to your account')" :description="__('Enter your email and password below to log in')" /> --}}
+    <x-auth-header :title="__('Log in to your account')" :description="__('Enter your email and password below to log in')" />
 
     <!-- Session Status -->
-    {{-- <x-auth-session-status class="text-center" :status="session('status')" /> --}}
+    <x-auth-session-status class="text-center" :status="session('status')" />
 
     <form wire:submit="login" class="flex flex-col gap-6">
         <!-- Email -->
-        <div>
-            <label for="email" class="label">
-                {{ __('Email address') }}
-            </label>
-            <input type="email" id="email" wire:model="email" required autocomplete="email"
-                placeholder="email@example.com"
-                class="input" />
-        </div>
+        <x-ui.form-field>
+            <x-ui.label for="email">{{ __('Email address') }}</x-ui.label>
+            <x-ui.input type="email" id="email" wire:model="email" required autocomplete="email"
+                placeholder="email@example.com" />
+        </x-ui.form-field>
 
         <div class="relative">
-            <div>
-                <label for="password" class="label">
-                    {{ __('Password') }}
-                </label>
-                <div class="relative mt-1">
-                    <input type="password" id="password" wire:model="password" required autocomplete="current-password"
-                        placeholder="{{ __('Password') }}"
-                        class="input pr-10" />
+            <x-ui.form-field>
+                <x-ui.label for="password">{{ __('Password') }}</x-ui.label>
+                <div class="relative">
+                    <x-ui.input type="password" id="password" wire:model="password" required autocomplete="current-password"
+                        placeholder="{{ __('Password') }}" class="pr-10" />
                     <button type="button"
                         onclick="var input = document.getElementById('password'); input.type = input.type === 'password' ? 'text' : 'password';"
                         class="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground">
@@ -35,7 +29,7 @@
                         </svg>
                     </button>
                 </div>
-            </div>
+            </x-ui.form-field>
 
             @if (Route::has('password.request'))
                 <a class="absolute end-0 top-0 text-sm text-primary hover:text-primary/80"
@@ -46,17 +40,16 @@
         </div>
 
         <!-- Remember Me -->
-        <label class="flex items-center">
-            <input type="checkbox" wire:model="remember"
+        <div class="flex items-center space-x-2">
+            <input type="checkbox" wire:model="remember" id="remember"
                 class="h-4 w-4 rounded border-input text-primary focus:ring-primary" />
-            <span class="ml-2 text-sm text-muted-foreground">{{ __('Remember me') }}</span>
-        </label>
+            <x-ui.label for="remember">{{ __('Remember me') }}</x-ui.label>
+        </div>
 
         <div class="flex items-center justify-end">
-            <button type="submit"
-                class="btn btn-default w-full">
+            <x-ui.button type="submit" class="w-full">
                 {{ __('Log in') }}
-            </button>
+            </x-ui.button>
         </div>
     </form>
 

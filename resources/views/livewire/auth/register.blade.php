@@ -6,34 +6,25 @@
 
     <form wire:submit="register" class="flex flex-col gap-6">
         <!-- Name -->
-        <div>
-            <label for="name" class="block text-sm font-medium text-foreground">
-                {{ __('Name') }}
-            </label>
-            <input type="text" id="name" wire:model="name" required autofocus autocomplete="name"
-                placeholder="{{ __('Full name') }}"
-                class="mt-1 block w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground shadow-sm outline-none placeholder:text-muted-foreground focus:border-ring focus:ring-1 focus:ring-ring disabled:bg-muted disabled:text-muted-foreground" />
-        </div>
+        <x-ui.form-field>
+            <x-ui.label for="name">{{ __('Name') }}</x-ui.label>
+            <x-ui.input type="text" id="name" wire:model="name" required autofocus autocomplete="name"
+                placeholder="{{ __('Full name') }}" />
+        </x-ui.form-field>
 
         <!-- Email Address -->
-        <div>
-            <label for="email" class="block text-sm font-medium text-foreground">
-                {{ __('Email address') }}
-            </label>
-            <input type="email" id="email" wire:model="email" required autocomplete="email"
-                placeholder="email@example.com"
-                class="mt-1 block w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground shadow-sm outline-none placeholder:text-muted-foreground focus:border-ring focus:ring-1 focus:ring-ring disabled:bg-muted disabled:text-muted-foreground" />
-        </div>
+        <x-ui.form-field>
+            <x-ui.label for="email">{{ __('Email address') }}</x-ui.label>
+            <x-ui.input type="email" id="email" wire:model="email" required autocomplete="email"
+                placeholder="email@example.com" />
+        </x-ui.form-field>
 
         <!-- Password -->
-        <div>
-            <label for="password" class="block text-sm font-medium text-foreground">
-                {{ __('Password') }}
-            </label>
-            <div class="relative mt-1">
-                <input type="password" id="password" wire:model="password" required autocomplete="new-password"
-                    placeholder="{{ __('Password') }}"
-                    class="block w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground shadow-sm outline-none placeholder:text-muted-foreground focus:border-ring focus:ring-1 focus:ring-ring disabled:bg-muted disabled:text-muted-foreground" />
+        <x-ui.form-field>
+            <x-ui.label for="password">{{ __('Password') }}</x-ui.label>
+            <div class="relative">
+                <x-ui.input type="password" id="password" wire:model="password" required autocomplete="new-password"
+                    placeholder="{{ __('Password') }}" class="pr-10" />
                 <button type="button"
                     onclick="var input = document.getElementById('password'); input.type = input.type === 'password' ? 'text' : 'password';"
                     class="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground">
@@ -45,17 +36,14 @@
                     </svg>
                 </button>
             </div>
-        </div>
+        </x-ui.form-field>
 
         <!-- Confirm Password -->
-        <div>
-            <label for="password_confirmation" class="block text-sm font-medium text-foreground">
-                {{ __('Confirm password') }}
-            </label>
-            <div class="relative mt-1">
-                <input type="password" id="password_confirmation" wire:model="password_confirmation" required
-                    autocomplete="new-password" placeholder="{{ __('Confirm password') }}"
-                    class="block w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground shadow-sm outline-none placeholder:text-muted-foreground focus:border-ring focus:ring-1 focus:ring-ring disabled:bg-muted disabled:text-muted-foreground" />
+        <x-ui.form-field>
+            <x-ui.label for="password_confirmation">{{ __('Confirm password') }}</x-ui.label>
+            <div class="relative">
+                <x-ui.input type="password" id="password_confirmation" wire:model="password_confirmation" required
+                    autocomplete="new-password" placeholder="{{ __('Confirm password') }}" class="pr-10" />
                 <button type="button"
                     onclick="var input = document.getElementById('password_confirmation'); input.type = input.type === 'password' ? 'text' : 'password';"
                     class="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground">
@@ -67,13 +55,12 @@
                     </svg>
                 </button>
             </div>
-        </div>
+        </x-ui.form-field>
 
         <div class="flex items-center justify-end">
-            <button type="submit"
-                class="inline-flex w-full items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:opacity-50">
+            <x-ui.button type="submit" class="w-full">
                 {{ __('Register') }}
-            </button>
+            </x-ui.button>
         </div>
     </form>
 
