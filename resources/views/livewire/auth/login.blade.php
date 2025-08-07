@@ -5,48 +5,62 @@
     <x-auth-session-status class="text-center" :status="session('status')" />
 
     <form wire:submit="login" class="flex flex-col gap-6">
-        <!-- Email Address -->
-        <flux:input
-            wire:model="email"
-            :label="__('Email address')"
-            type="email"
-            required
-            autofocus
-            autocomplete="email"
-            placeholder="email@example.com"
-        />
+        <!-- Email -->
+        <x-ui.form-field>
+            <x-ui.label for="email">{{ __('Email address') }}</x-ui.label>
+            <x-ui.input type="email" id="email" wire:model="email" required autocomplete="email"
+                placeholder="email@example.com" />
+        </x-ui.form-field>
 
-        <!-- Password -->
         <div class="relative">
-            <flux:input
-                wire:model="password"
-                :label="__('Password')"
-                type="password"
-                required
-                autocomplete="current-password"
-                :placeholder="__('Password')"
-                viewable
-            />
+            <x-ui.form-field>
+                <x-ui.label for="password">{{ __('Password') }}</x-ui.label>
+                <div class="relative">
+                    <x-ui.input type="password" id="password" wire:model="password" required autocomplete="current-password"
+                        placeholder="{{ __('Password') }}" class="pr-10" />
+                    <button type="button"
+                        onclick="var input = document.getElementById('password'); input.type = input.type === 'password' ? 'text' : 'password';"
+                        class="absolute inset-y-0 right-0 flex items-center px-3 text-muted-foreground hover:text-foreground">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="h-5 w-5">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </button>
+                </div>
+            </x-ui.form-field>
 
             @if (Route::has('password.request'))
-                <flux:link class="absolute end-0 top-0 text-sm" :href="route('password.request')" wire:navigate>
+                <a class="absolute end-0 top-0 text-sm text-primary hover:text-primary/80"
+                    href="{{ route('password.request') }}" wire:navigate>
                     {{ __('Forgot your password?') }}
-                </flux:link>
+                </a>
             @endif
         </div>
 
         <!-- Remember Me -->
-        <flux:checkbox wire:model="remember" :label="__('Remember me')" />
+        <div class="flex items-center space-x-2">
+            <input type="checkbox" wire:model="remember" id="remember"
+                class="h-4 w-4 rounded border-input text-primary focus:ring-primary" />
+            <x-ui.label for="remember">{{ __('Remember me') }}</x-ui.label>
+        </div>
 
         <div class="flex items-center justify-end">
-            <flux:button variant="primary" type="submit" class="w-full">{{ __('Log in') }}</flux:button>
+            <x-ui.button type="submit" class="w-full">
+                {{ __('Log in') }}
+            </x-ui.button>
         </div>
     </form>
 
     @if (Route::has('register'))
-        <div class="space-x-1 rtl:space-x-reverse text-center text-sm text-zinc-600 dark:text-zinc-400">
+        <div class="space-x-1 text-center text-sm text-muted-foreground rtl:space-x-reverse">
             {{ __('Don\'t have an account?') }}
-            <flux:link :href="route('register')" wire:navigate>{{ __('Sign up') }}</flux:link>
+            <a href="{{ route('register') }}"
+                class="text-primary hover:text-primary/80"
+                wire:navigate>
+                {{ __('Sign up') }}
+            </a>
         </div>
     @endif
 </div>

@@ -1,4 +1,4 @@
- <div class="flex flex-col gap-6">
+<div class="flex flex-col gap-6">
     <x-auth-header :title="__('Forgot password')" :description="__('Enter your email to receive a password reset link')" />
 
     <!-- Session Status -->
@@ -6,21 +6,22 @@
 
     <form wire:submit="sendPasswordResetLink" class="flex flex-col gap-6">
         <!-- Email Address -->
-        <flux:input
-            wire:model="email"
-            :label="__('Email Address')"
-            type="email"
-            required
-            autofocus
-            placeholder="email@example.com"
-            viewable
-        />
+        <x-ui.form-field>
+            <x-ui.label for="email">{{ __('Email Address') }}</x-ui.label>
+            <x-ui.input type="email" id="email" wire:model="email" required autofocus placeholder="email@example.com" />
+        </x-ui.form-field>
 
-        <flux:button variant="primary" type="submit" class="w-full">{{ __('Email password reset link') }}</flux:button>
+        <x-ui.button type="submit" class="w-full">
+            {{ __('Email password reset link') }}
+        </x-ui.button>
     </form>
 
-    <div class="space-x-1 rtl:space-x-reverse text-center text-sm text-zinc-400">
+    <div class="space-x-1 text-center text-sm text-muted-foreground rtl:space-x-reverse">
         {{ __('Or, return to') }}
-        <flux:link :href="route('login')" wire:navigate>{{ __('log in') }}</flux:link>
+        <a href="{{ route('login') }}"
+            class="text-primary hover:text-primary/80"
+            wire:navigate>
+            {{ __('log in') }}
+        </a>
     </div>
 </div>
